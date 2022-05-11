@@ -10,7 +10,7 @@ namespace BulkyBookWeb.Models
         [Required]
         public string Name { get; set; }
 
-        public string DisplayOrder{ get; set; }
+        public int DisplayOrder { get; set; }
 
         public DateTime CreatedDateTime { get; set; } = DateTime.Now;
 
@@ -18,3 +18,6 @@ namespace BulkyBookWeb.Models
 
     }
 }
+
+//Add migration folder and files -> add-migration AddCategoryToDadabase
+//Push migrations to the database -> update database
