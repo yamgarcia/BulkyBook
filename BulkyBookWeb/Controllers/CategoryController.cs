@@ -30,6 +30,11 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Category obj)
     {
+        if (obj.Name == obj.DisplayOrder.ToString())
+        {
+            ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the Name");
+        }
+
         //Can I modify "The value '' is invalid." before it's sent to view?
         if (ModelState.IsValid)
         {
