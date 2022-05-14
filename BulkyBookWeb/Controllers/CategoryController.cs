@@ -30,9 +30,14 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Category obj)
     {
-        _db.Categories.Add(obj);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
+        //Can I modify "The value '' is invalid." before it's sent to view?
+        if (ModelState.IsValid)
+        {
+            _db.Categories.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        return View(obj);
     }
 }
 
