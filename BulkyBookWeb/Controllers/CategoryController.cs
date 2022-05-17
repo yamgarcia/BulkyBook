@@ -118,10 +118,16 @@ public class CategoryController : Controller
      * By confirming the Deletion line 23 on C:\Users\Marcos\Documents\GitHub\C#\BulkyBook\BulkyBookWeb\Views\Category\Delete.cshtml
      *
      */
-    [HttpPost]
+    // POST
+    [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public IActionResult Delete(Category obj)
+    public IActionResult DeletePOST(int? id)
     {
+        var obj = _db.Categories.Find(id);
+        if (obj == null)
+        {
+            return NotFound();
+        }
         _db.Categories.Remove(obj);
         _db.SaveChanges();
         return RedirectToAction("Index");

@@ -3,7 +3,8 @@
     ViewData["Title"] = "Create";
 }
 
-<form method="post" asp-controller="Category" asp-action="Delete" >
+<form method="post" asp-controller="Category" asp-action="Delete">
+    @*<input asp-for="Id" hidden/> Necessary in previous .NET versions when all inputs are disabled *@
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Delete Category</h2>
