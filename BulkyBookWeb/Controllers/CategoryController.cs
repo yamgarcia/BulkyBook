@@ -44,5 +44,45 @@ public class CategoryController : Controller
         }
         return View(obj);
     }
+
+    //GET
+    public IActionResult Edit(int? id)
+    {
+        if(id == null || id == 0)
+        {
+            return NotFound();
+        }
+
+        var categoryFromDbFind = _db.Categories.Find(id);
+        //var categoryFromDbFirst = _db.Categories.FirstOrDefault(c => c.Id == id);
+        //var categoryFromDbSingle = _db.Categories.SingleOrDefault(c => c.Id == id);
+
+        if(categoryFromDbFind == null)
+        {
+            return NotFound();
+        }
+
+        return View(categoryFromDbFind);
+    }
+
+    //POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(Category obj)
+    {
+        if (obj.Name == obj.DisplayOrder.ToString())
+        {
+            ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the Name");
+        }
+
+        //Can I modify "The value '' is invalid." before it's sent to view?
+        if (ModelState.IsValid)
+        {
+            _db.Categories.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        return View(obj);
+    }
 }
 
