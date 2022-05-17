@@ -3,7 +3,7 @@ using BulkyBookWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBookWeb.Controllers;
-public class CategoryController : Controller 
+public class CategoryController : Controller
 {
 
     private readonly ApplicationDbContext _db;
@@ -13,15 +13,15 @@ public class CategoryController : Controller
         _db = db;
     }
 
-    public IActionResult Index() 
+    public IActionResult Index()
     {
         IEnumerable<Category> objCategoryList = _db.Categories;
         return View(objCategoryList);
     }
-        
+
     //GET
     public IActionResult Create()
-    {        
+    {
         return View();
     }
 
@@ -48,7 +48,7 @@ public class CategoryController : Controller
     //GET
     public IActionResult Edit(int? id)
     {
-        if(id == null || id == 0)
+        if (id == null || id == 0)
         {
             return NotFound();
         }
@@ -57,7 +57,7 @@ public class CategoryController : Controller
         //var categoryFromDbFirst = _db.Categories.FirstOrDefault(c => c.Id == id);
         //var categoryFromDbSingle = _db.Categories.SingleOrDefault(c => c.Id == id);
 
-        if(categoryFromDbFind == null)
+        if (categoryFromDbFind == null)
         {
             return NotFound();
         }
@@ -83,6 +83,48 @@ public class CategoryController : Controller
             return RedirectToAction("Index");
         }
         return View(obj);
+    }
+
+    /*
+     * GET
+     * 
+     * Method used to show the object from the database on the screen.
+     * By clicking the Delete button line 52 on C:\Users\Marcos\Documents\GitHub\C#\BulkyBook\BulkyBookWeb\Views\Category\Index.cshtml
+     * 
+     */
+    public IActionResult Delete(int? id)
+    {
+        if (id == null || id == 0)
+        {
+            return NotFound();
+        }
+
+        var categoryFromDbFind = _db.Categories.Find(id);
+        //var categoryFromDbFirst = _db.Categories.FirstOrDefault(c => c.Id == id);
+        //var categoryFromDbSingle = _db.Categories.SingleOrDefault(c => c.Id == id);
+
+        if (categoryFromDbFind == null)
+        {
+            return NotFound();
+        }
+
+        return View(categoryFromDbFind);
+    }
+
+    /*
+     * POST
+     *
+     * Method used to DELETE the object from the database.
+     * By confirming the Deletion line 23 on C:\Users\Marcos\Documents\GitHub\C#\BulkyBook\BulkyBookWeb\Views\Category\Delete.cshtml
+     *
+     */
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Delete(Category obj)
+    {
+        _db.Categories.Remove(obj);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
     }
 }
 
