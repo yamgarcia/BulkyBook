@@ -78,7 +78,7 @@ public class CategoryController : Controller
         //Can I modify "The value '' is invalid." before it's sent to view?
         if (ModelState.IsValid)
         {
-            _db.Categories.Add(obj);
+            _db.Categories.Update(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
