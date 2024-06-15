@@ -1,6 +1,6 @@
 # Bulky Book
 
-Bulky Book is an Blazor ASP.NET Core MVC application for managing categories with a SQL Server database backend.
+Bulky Book is a Blazor ASP.NET Core MVC application for managing categories with a SQL Server database backend.
 
  <a href="linko-app.herokuapp.com/" ><img src="./BulkyBook.png" width="800px" /><br></a>
 
