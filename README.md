@@ -2,7 +2,7 @@
 
 Bulky Book is an ASP.NET Core MVC application for managing categories with a SQL Server database backend.
 
-![image (1)]([https://github.com/yamgarcia/BulkyBook/BulkyBook.png](https://github.com/yamgarcia/BulkyBook/blob/master/BulkyBook.png?raw=true))
+ <a href="linko-app.herokuapp.com/" ><img src="./BulkyBook.png" width="800px" /><br></a>
 
 ## Getting Started
 
